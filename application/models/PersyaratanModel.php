@@ -17,6 +17,13 @@ class PersyaratanModel extends CI_Model
             'keterangan' => $this->input->post('keterangan')
         ];
         $this->db->insert($this->tabel, $data);
+        if ($this->db->affected_rows() > 0) { //cek proses perubahan data pada tabel, apabila lebih  
+            $this->session->set_flashdata('pesan', "Data persyaratan berhasil ditambahkan!");
+            $this->session->set_flashdata('status', true);
+        } else {
+            $this->session->set_flashdata('pesan', "Data persyaratan gagal ditambahkan!");
+            $this->session->set_flashdata('status', false);
+        }
     }
 
     public function get_persyaratan_byid($id)

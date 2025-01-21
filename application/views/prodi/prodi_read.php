@@ -18,9 +18,13 @@
         </div>
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <?php
+                $this->load->view('template/notifikasi') //menanggil notifikasi.php
+                ?>
                 <div class="card">
                     <div class="card-header">
                         <a href="<?= base_url('prodi/tambah') ?>" class="btn btn-sm btn-success float-right"><i class="fas fa-plus">Tambah Data</i></a>
+                        <a href="<?= base_url('prodi/cetak') ?>" target="_blank" class="btn btn-sm btn-info mr-1 float-right"><i class="fas fa-print">Cetak Data</i></a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="mytabel">

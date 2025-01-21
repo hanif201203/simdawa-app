@@ -20,6 +20,13 @@ class JenisModel extends CI_Model
         //nama_jenis sebalah kiri, sesuaikan dengan nama kolom di tabel  
         //nama_jenis sebelah kanan, sesuaikan dengan name di form yaitu (jenis_create.php baris 29)  
         $this->db->insert($this->tabel, $data);
+        if ($this->db->affected_rows() > 0) { //cek proses perubahan data pada tabel, apabila lebih  
+            $this->session->set_flashdata('pesan', "Data jenis berhasil ditambahkan!");
+            $this->session->set_flashdata('status', true);
+        } else {
+            $this->session->set_flashdata('pesan', "Data jenis gagal ditambahkan!");
+            $this->session->set_flashdata('status', false);
+        }
     }
 
     //function dengan 1 parameter. $id nilainya dikirimkan oleh controller  
@@ -38,17 +45,27 @@ class JenisModel extends CI_Model
                 'keterangan' => $this->input->post('keterangan')
             ];
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update($this->tabel, $data);  
-        /* proses update hampir sama seperti insert, bedanya, ada tambahan where (baris 39)  
-        untuk menentukan data mana yang akan diperbaharui */
+        $this->db->update($this->tabel, $data);
+        if ($this->db->affected_rows() > 0) { //cek proses perubahan data pada tabel, apabila lebih  
+            $this->session->set_flashdata('pesan', "Data jenis berhasil update!");
+            $this->session->set_flashdata('status', true);
+        } else {
+            $this->session->set_flashdata('pesan', "Data jenis gagal update!");
+            $this->session->set_flashdata('status', false);
+        }
     }
 
     public function delete_jenis($id)
     {
         $this->db->where('id', $id);
         $this->db->delete($this->tabel);
-        //sebelum dilakukan hapus, tambahkan where dulu untuk menentukan data mana yang dihapus  
-        //untuk proses hapus gunakan fungsi delete(namatabel)  
+        if ($this->db->affected_rows() > 0) { //cek proses perubahan data pada tabel, apabila lebih  
+            $this->session->set_flashdata('pesan', "Data jenis berhasil dihapus!");
+            $this->session->set_flashdata('status', true);
+        } else {
+            $this->session->set_flashdata('pesan', "Data jenis gagal dihapus!");
+            $this->session->set_flashdata('status', false);
+        }
     }
 
 }
